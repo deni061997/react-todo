@@ -1,70 +1,86 @@
-import * as api from '../api'
+import * as api from "../api";
 
 const initialState = {
   items: [],
-  loading: false
-}
+  getLoading: false,
+  createLoading: false,
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'CREATE_TODO':
-      const check = state.items.some(item => item.title === action.payload.title)
-      if (!check) {
-        return {
-          ...state,
-          items: [action.payload, ...state.items]
-        }
-      }
+    case "CREATE_TODO_START":
       return {
         ...state,
-        items: state.items
-      }
-    case 'GET_TODOS':
+        createLoading: true,
+      };
+    case "CREATE_TODO_SUCCESS":
       return {
         ...state,
-        items: action.payload.reverse()
-      }
-    case 'DELETE_TODO':
+        items: [action.payload, ...state.items],
+        createLoading: false,
+      };
+    case "GET_TODOS_START":
       return {
         ...state,
-        items: state.items.filter(item => item._id !== action.payload)
-      }
+        getLoading: true,
+      };
+    case "GET_TODOS":
+      return {
+        ...state,
+        items: action.payload,
+        getLoading: false,
+      };
+    case "DELETE_TODO":
+      return {
+        ...state,
+        items: state.items.filter((item) => item._id !== action.payload),
+        deleteLoading: false,
+      };
+    case "UPDATE_TODO":
+      return {
+        ...state,
+        items: state.items.map((item) => {
+          if (item._id === action.payload.id) {
+            return action.payload.updatedPost;
+          }
+          return item;
+        }),
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const getTodos = () => async (dispatch) => {
   try {
-    
-    const { data } = await api.getTodos()
+    dispatch({ type: "GET_TODOS_START" });
 
-    dispatch({ type: 'GET_TODOS', payload: data })
+    const { data } = await api.getTodos();
 
+    dispatch({ type: "GET_TODOS", payload: data });
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data.message);
   }
-}
+};
 
 export const createTodo = (todo) => async (dispatch) => {
   try {
+    dispatch({ type: "CREATE_TODO_START" });
 
-    dispatch({ type: 'CREATE_TODO', payload: todo})
+    const { data } = await api.createTodo(todo);
 
-    await api.createTodo(todo)
-
+    dispatch({ type: "CREATE_TODO_SUCCESS", payload: data });
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export const deleteTodo = (id) => async (dispatch) => {
   try {
+    dispatch({ type: "DELETE_TODO", payload: id });
 
-    await api.deleteTodo(id)
-
-    dispatch({ type: 'DELETE_TODO', payload: id})
+    await api.deleteTodo(id);
   } catch (error) {
     console.log(error);
   }
-}
+};

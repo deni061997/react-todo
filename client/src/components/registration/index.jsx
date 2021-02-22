@@ -1,75 +1,77 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { Container, Form, Input, Button, ClearButton } from './styles'
-import { signUp } from '../../redux/user'
-import { useHistory } from 'react-router-dom'
-
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Container, Form, Input, Button, ClearButton } from "./styles";
+import { signUp } from "../../redux/user";
+import { useHistory } from "react-router-dom";
 
 export default function Enter() {
-  const history = useHistory()
-  const dispatch = useDispatch()
-  const initialState = { firstName: '', lastName: '',  email: '', password: '', repeatPassword: ''}
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const initialState = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    repeatPassword: "",
+  };
 
-  const [form, setForm] = useState(initialState)
+  const [form, setForm] = useState(initialState);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-  }
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-  const formDataSet = Object.values(form).every(input => !!input)
-  
+  const formDataSet = Object.values(form).every((input) => !!input);
+
   const onHandleSubmit = (e) => {
-    e.preventDefault()
-    if(!formDataSet) {
-      return alert('Пожалуйста, заполните все поля!')
+    e.preventDefault();
+    if (!formDataSet) {
+      return alert("Пожалуйста, заполните все поля!");
     }
-    clear(e)
-    signUp(form, history)
-  }
+    clear(e);
+    signUp(form, history);
+  };
 
   const clear = (e) => {
-    e.preventDefault()
-    setForm(initialState)
-  }
+    e.preventDefault();
+    setForm(initialState);
+  };
 
   return (
     <Container>
-      <form 
-        onSubmit={onHandleSubmit}
-        noValidate
-        >
+      <form onSubmit={onHandleSubmit} noValidate>
         <Form>
           <Input
-            placeholder='First Name'
-            name='firstName' 
+            placeholder="First Name"
+            name="firstName"
             type="text"
             onChange={handleChange}
             value={form.firstName}
           />
           <Input
-            placeholder='Last Name'
-            name='lastName' 
+            placeholder="Last Name"
+            name="lastName"
             type="text"
             onChange={handleChange}
             value={form.lastName}
           />
           <Input
-            placeholder='Email'
-            name='email' 
+            placeholder="Email"
+            name="email"
             type="email"
             onChange={handleChange}
             value={form.email}
           />
           <Input
-            placeholder='Password'
-            name='password' 
+            placeholder="Password"
+            name="password"
             type="password"
             onChange={handleChange}
             value={form.password}
           />
           <Input
-            placeholder='Confirm Password'
-            name='repeatPassword' 
+            placeholder="Confirm Password"
+            name="repeatPassword"
             type="password"
             onChange={handleChange}
             value={form.repeatPassword}
@@ -79,5 +81,5 @@ export default function Enter() {
         </Form>
       </form>
     </Container>
-  )
+  );
 }

@@ -1,11 +1,11 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
   height: 100%;
-`
+`;
 
 export const Main = styled.div`
   width: 100%;
@@ -15,7 +15,7 @@ export const Main = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-`
+`;
 
 export const Form = styled.div`
   width: 100%;
@@ -25,7 +25,7 @@ export const Form = styled.div`
   align-items: center;
   display: flex;
   gap: 8px;
-`
+`;
 
 export const Input = styled.input`
   width: 60%;
@@ -35,7 +35,7 @@ export const Input = styled.input`
   font-size: 19px;
   align-items: center;
   padding: 10px;
-`
+`;
 
 export const Task = styled.div`
   width: 100%;
@@ -43,8 +43,7 @@ export const Task = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  overflow-y: scroll;
-`
+`;
 
 export const InputContainer = styled.div`
   width: 30%;
@@ -53,16 +52,16 @@ export const InputContainer = styled.div`
   border-radius: 5px;
   align-items: center;
   justify-content: space-between;
-  background-color: white
-`
+  background-color: white;
+`;
 
 export const ButtonDelete = styled.button`
   border: none;
   background-color: white;
   cursor: pointer;
   outline: none;
-  margin-right: 10px
-`
+  margin-right: 10px;
+`;
 
 export const Button = styled.button`
   width: 200px;
@@ -79,4 +78,4 @@ export const Button = styled.button`
     box-shadow: #666;
     transform: translateY(4px);
   }
-`
+`;

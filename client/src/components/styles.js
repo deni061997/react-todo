@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
@@ -6,5 +6,4 @@ export const Container = styled.div`
   overflow: hidden;
   max-width: 1920px;
   min-width: 100%;
-`
-
+`;
