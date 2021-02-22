@@ -1,5 +1,7 @@
 # React-todo - это приложение для добавления задач. 
 
+**Demo** https://reacttodo111.herokuapp.com/home
+
 **Стек технологий используемых в проекте**
 - React
 - Redux (thunk)
